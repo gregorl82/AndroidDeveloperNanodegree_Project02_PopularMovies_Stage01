@@ -11,6 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapterViewHolder> {
 
+    // TODO (2) Add fields for Movie array
+    // TODO (5) Modify implemented methods to use movie_item.xml
+    // TODO (12) Add onClickListener to view holder
+
     private final int NUM_OF_ITEMS = 50;
 
     @NonNull
@@ -39,6 +43,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
     }
 
     public static class MovieAdapterViewHolder extends RecyclerView.ViewHolder {
+
+        // TODO (6) Add fields for main activity views
 
         public TextView mTestItemTextView;
         public MovieAdapterViewHolder(View view) {

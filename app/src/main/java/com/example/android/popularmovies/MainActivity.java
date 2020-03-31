@@ -8,6 +8,12 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
+    // TODO (3) Add private variable for Movie array list
+    // TODO (4) Create dummy data
+    // TODO (10) Use AsyncTask to replace dummy data
+    // TODO (13) Implement onClick methods for intents
+    // TODO (16) Implement menu and sort method
+
     private RecyclerView mRecyclerView;
     private MovieAdapter mMovieAdapter;
     private GridLayoutManager mLayoutManager;

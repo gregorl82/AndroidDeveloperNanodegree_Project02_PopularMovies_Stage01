@@ -17,11 +17,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
     @Override
     public MovieAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
-        int idOfView = R.layout.test_item;
+        int idOfLayout = R.layout.test_item;
 
         boolean shouldAttachImmediatelyToParent = false;
 
-        View view = LayoutInflater.from(context).inflate(idOfView, parent, shouldAttachImmediatelyToParent);
+        View view = LayoutInflater.from(context).inflate(idOfLayout, parent, shouldAttachImmediatelyToParent);
         MovieAdapterViewHolder viewHolder = new MovieAdapterViewHolder(view);
 
         return viewHolder;

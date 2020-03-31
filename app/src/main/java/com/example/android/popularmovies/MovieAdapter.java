@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapterViewHolder> {
 
-    private final int NUM_OF_ITEMS = 20;
+    private final int NUM_OF_ITEMS = 50;
 
     @NonNull
     @Override
@@ -29,7 +29,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
 
     @Override
     public void onBindViewHolder(@NonNull MovieAdapterViewHolder holder, int position) {
-        String text = String.valueOf(position);
+        String text = String.valueOf(position + 1);
         holder.mTestItemTextView.setText(text);
     }
 

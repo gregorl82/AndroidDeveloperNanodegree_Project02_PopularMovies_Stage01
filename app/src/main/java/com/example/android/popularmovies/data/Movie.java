@@ -7,9 +7,9 @@ public class Movie {
     private String releaseDate;
     private String image;
     private String plot;
-    private int rating;
+    private double rating;
 
-    public Movie(String title, String releaseDate, String image, String plot, int rating) {
+    public Movie(String title, String releaseDate, String image, String plot, double rating) {
         this.title = title;
         this.releaseDate = releaseDate;
         this.image = image;
@@ -33,7 +33,7 @@ public class Movie {
         return plot;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 }

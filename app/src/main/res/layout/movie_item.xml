@@ -4,22 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="300dp"
+    android:padding="16dp">
 
     <ImageView
         android:id="@+id/iv_movie_poster"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        tools:srcCompat="@drawable/poster_1917" />
+        android:layout_height="240dp"
+        android:padding="4dp"
+        tools:srcCompat="@drawable/poster_adastra" />
 
     <TextView
         android:id="@+id/tv_movie_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="1917"
-        android:textSize="25sp"
-        android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
         android:textAlignment="center"/>
 
 </LinearLayout>

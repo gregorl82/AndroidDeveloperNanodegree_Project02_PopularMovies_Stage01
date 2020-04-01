@@ -4,24 +4,33 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.android.popularmovies.data.Movie;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapterViewHolder> {
 
-    // TODO (2) Add fields for Movie array
-    // TODO (5) Modify implemented methods to use movie_item.xml
+    // COMPLETED (2) Add fields for Movie array
+    private ArrayList<Movie> mMovies;
+    // COMPLETED (5) Modify implemented methods to use movie_item.xml
     // TODO (12) Add onClickListener to view holder
 
-    private final int NUM_OF_ITEMS = 50;
+    public MovieAdapter(ArrayList<Movie> mMovies) {
+        this.mMovies = mMovies;
+    }
 
     @NonNull
     @Override
     public MovieAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
-        int idOfLayout = R.layout.test_item;
+        int idOfLayout = R.layout.movie_item;
 
         boolean shouldAttachImmediatelyToParent = false;
 
@@ -33,23 +42,30 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
 
     @Override
     public void onBindViewHolder(@NonNull MovieAdapterViewHolder holder, int position) {
-        String text = String.valueOf(position + 1);
-        holder.mTestItemTextView.setText(text);
+        Movie currentMovie = mMovies.get(position);
+        String title = currentMovie.getTitle();
+        String image = currentMovie.getImage();
+
+        Picasso.get().load(image).fit().into(holder.mPosterImageView);
+        holder.mTitleTextView.setText(title);
     }
 
     @Override
     public int getItemCount() {
-        return NUM_OF_ITEMS;
+        return mMovies.size();
     }
 
     public static class MovieAdapterViewHolder extends RecyclerView.ViewHolder {
 
-        // TODO (6) Add fields for main activity views
+        // COMPLETED (6) Add fields for main activity views
 
-        public TextView mTestItemTextView;
+        private ImageView mPosterImageView;
+        private TextView mTitleTextView;
+
         public MovieAdapterViewHolder(View view) {
             super(view);
-            mTestItemTextView = view.findViewById(R.id.tv_test_item);
+            mPosterImageView = view.findViewById(R.id.iv_movie_poster);
+            mTitleTextView = view.findViewById(R.id.tv_movie_title);
         }
     }
 

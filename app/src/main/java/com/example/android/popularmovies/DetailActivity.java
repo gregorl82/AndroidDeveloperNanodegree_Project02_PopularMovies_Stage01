@@ -2,6 +2,7 @@ package com.example.android.popularmovies;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,9 +11,6 @@ import com.example.android.popularmovies.data.Movie;
 import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity {
-
-    // COMPLETED (11) Assign dummy mMovie and populate UI
-    // TODO (14) Use intent to assign mMovie
 
     private Movie mMovie;
 
@@ -33,9 +31,13 @@ public class DetailActivity extends AppCompatActivity {
         mRatingTextView = findViewById(R.id.tv_detail_rating);
         mPlotTextView = findViewById(R.id.tv_detail_plot);
 
-        mMovie = new Movie("The Lion King", "2019-07-12", "https://image.tmdb.org/t/p/w185/2bXbqYdUdNVa8VIWXVfclP2ICtT.jpg", "Simba idolizes his father, King Mufasa, and takes to heart his own royal destiny. But not everyone in the kingdom celebrates the new cub's arrival. Scar, Mufasa's brother—and former heir to the throne—has plans of his own. The battle for Pride Rock is ravaged with betrayal, tragedy and drama, ultimately resulting in Simba's exile. With help from a curious pair of newfound friends, Simba will have to figure out how to grow up and take back what is rightfully his.",7.1);
+        Intent incomingIntent = getIntent();
 
-        populateUI(mMovie);
+        if (incomingIntent.hasExtra("Clicked movie")) {
+            mMovie = incomingIntent.getParcelableExtra("Clicked movie");
+            populateUI(mMovie);
+        }
+
     }
 
     private void populateUI(Movie movie) {
@@ -52,4 +54,6 @@ public class DetailActivity extends AppCompatActivity {
         mRatingTextView.setText(rating);
         mPlotTextView.setText(plot);
     }
+
+    // TODO (7) Implement menu and back method
 }

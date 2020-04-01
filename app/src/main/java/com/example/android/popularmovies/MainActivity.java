@@ -4,19 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.android.popularmovies.data.Movie;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler {
 
-    // COMPLETED (3) Add private variable for Movie array list
-    // COMPLETED (4) Create dummy data
-    // TODO (10) Use AsyncTask to replace dummy data
-    // TODO (13) Implement onClick methods for intents
-    // TODO (16) Implement menu and sort method
+    // TODO (3) Use AsyncTask to replace dummy data
+    // TODO (5) Implement menu and sort method
 
     private ArrayList<Movie> mMovies;
 
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         mLayoutManager = new GridLayoutManager(this, 2, RecyclerView.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mMovieAdapter = new MovieAdapter(mMovies);
+        mMovieAdapter = new MovieAdapter(mMovies, this);
         mRecyclerView.setAdapter(mMovieAdapter);
 
     }
@@ -60,5 +59,16 @@ public class MainActivity extends AppCompatActivity {
         moviesArray.add(movie6);
 
         return moviesArray;
+    }
+
+    @Override
+    public void onItemClick(Movie movie) {
+        Context context = this;
+        Class detailActivity = DetailActivity.class;
+
+        Intent intent = new Intent(context, detailActivity);
+        intent.putExtra("Clicked movie", movie);
+
+        startActivity(intent);
     }
 }

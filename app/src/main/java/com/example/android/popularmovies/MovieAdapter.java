@@ -17,13 +17,16 @@ import java.util.ArrayList;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapterViewHolder> {
 
-    // COMPLETED (2) Add fields for Movie array
     private ArrayList<Movie> mMovies;
-    // COMPLETED (5) Modify implemented methods to use movie_item.xml
-    // TODO (12) Add onClickListener to view holder
+    private final MovieAdapterOnClickHandler mClickHandler;
 
-    public MovieAdapter(ArrayList<Movie> mMovies) {
-        this.mMovies = mMovies;
+    public interface MovieAdapterOnClickHandler {
+        void onItemClick(Movie movie);
+    }
+
+    public MovieAdapter(ArrayList<Movie> movies, MovieAdapterOnClickHandler handler) {
+        this.mMovies = movies;
+        this.mClickHandler = handler;
     }
 
     @NonNull
@@ -55,9 +58,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
         return mMovies.size();
     }
 
-    public static class MovieAdapterViewHolder extends RecyclerView.ViewHolder {
-
-        // COMPLETED (6) Add fields for main activity views
+    public class MovieAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView mPosterImageView;
         private TextView mTitleTextView;
@@ -66,6 +67,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
             super(view);
             mPosterImageView = view.findViewById(R.id.iv_movie_poster);
             mTitleTextView = view.findViewById(R.id.tv_movie_title);
+
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            int adapterPosition = getAdapterPosition();
+            Movie movie = mMovies.get(adapterPosition);
+            mClickHandler.onItemClick(movie);
         }
     }
 

@@ -44,7 +44,7 @@ public class DetailActivity extends AppCompatActivity {
         String image = movie.getImage();
         String title = movie.getTitle();
         String releaseDate = movie.getReleaseDate();
-        String rating = String.valueOf(movie.getRating());
+        String rating = movie.getRating() + " out of 10";
         String plot = movie.getPlot();
 
         Picasso.get().load(image).fit().into(mMoviePosterImageView);

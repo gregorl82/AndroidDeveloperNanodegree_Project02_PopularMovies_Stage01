@@ -46,11 +46,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
     @Override
     public void onBindViewHolder(@NonNull MovieAdapterViewHolder holder, int position) {
         Movie currentMovie = mMovies.get(position);
-        String title = currentMovie.getTitle();
         String image = currentMovie.getImage();
 
         Picasso.get().load(image).fit().into(holder.mPosterImageView);
-        holder.mTitleTextView.setText(title);
     }
 
     @Override
@@ -66,12 +64,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
     public class MovieAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private ImageView mPosterImageView;
-        private TextView mTitleTextView;
 
         public MovieAdapterViewHolder(View view) {
             super(view);
             mPosterImageView = view.findViewById(R.id.iv_movie_poster);
-            mTitleTextView = view.findViewById(R.id.tv_movie_title);
 
             view.setOnClickListener(this);
         }

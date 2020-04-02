@@ -59,27 +59,4 @@ public class DetailActivity extends AppCompatActivity {
         mPlotTextView.setText(plot);
     }
 
-    // TODO (4) Implement menu and back method
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.detail_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int selectedItemId = item.getItemId();
-
-        if (selectedItemId == R.id.action_back) {
-            Context context = this;
-            Class mainActivity = MainActivity.class;
-            Intent intent = new Intent(context, mainActivity);
-            startActivity(intent);
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
 }

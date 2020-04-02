@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,11 +47,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
         Movie currentMovie = mMovies.get(position);
         String image = currentMovie.getImage();
 
-        Picasso.get().load(image).fit().into(holder.mPosterImageView);
+        Picasso.get().load(image).into(holder.mPosterImageView);
     }
 
     @Override
     public int getItemCount() {
+        if (mMovies == null) {
+            return 0;
+        }
         return mMovies.size();
     }
 

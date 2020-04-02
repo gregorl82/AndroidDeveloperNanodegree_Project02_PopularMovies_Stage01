@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -32,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     private ProgressBar mProgressBar;
 
     private MovieAdapter mMovieAdapter;
-    private GridLayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,49 +46,13 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
         mRecyclerView.setHasFixedSize(true);
 
-        mLayoutManager = new GridLayoutManager(this, 2, RecyclerView.VERTICAL, false);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2, RecyclerView.VERTICAL, false);
+        mRecyclerView.setLayoutManager(layoutManager);
 
         mMovieAdapter = new MovieAdapter(mMovies, this);
         mRecyclerView.setAdapter(mMovieAdapter);
 
-        URL initialUrl = NetworkUtils.buildUrl("popular");
-        new FetchMoviesTask().execute(initialUrl);
-    }
-
-    public class FetchMoviesTask extends AsyncTask<URL, Void, String> {
-
-        @Override
-        protected void onPreExecute() {
-            mProgressBar.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected String doInBackground(URL... params) {
-            URL queryUrl = params[0];
-            String json = null;
-            try {
-                json = NetworkUtils.getResponseFromApi(queryUrl);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return json;
-        }
-
-        @Override
-        protected void onPostExecute(String json) {
-            mProgressBar.setVisibility(View.INVISIBLE);
-            ArrayList<Movie> foundMovies;
-            if (json != null && !json.equals(" ")) {
-                foundMovies = JsonUtils.parseJsonResponse(json);
-                mMovies = foundMovies;
-                mMovieAdapter.setMovieData(mMovies);
-                showRecyclerView();
-            } else {
-                showErrorMessage();
-            }
-
-        }
+        getDataFromNetwork("popular");
     }
 
     @Override
@@ -111,6 +76,50 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mErrorMessageDisplay.setVisibility(View.VISIBLE);
     }
 
+    private void getDataFromNetwork(String endpoint) {
+        URL initialUrl = NetworkUtils.buildUrl(endpoint);
+        new FetchMoviesTask().execute(initialUrl);
+    }
+
+    public class FetchMoviesTask extends AsyncTask<URL, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mProgressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(URL... params) {
+            URL queryUrl = params[0];
+            String json = null;
+
+            if (isOnline()) {
+                try {
+                    json = NetworkUtils.getResponseFromApi(queryUrl);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return json;
+        }
+
+        @Override
+        protected void onPostExecute(String json) {
+            mProgressBar.setVisibility(View.INVISIBLE);
+            ArrayList<Movie> foundMovies;
+            if (json != null) {
+                foundMovies = JsonUtils.parseJsonResponse(json);
+                mMovies = foundMovies;
+                mMovieAdapter.setMovieData(mMovies);
+                showRecyclerView();
+            } else {
+                showErrorMessage();
+            }
+
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -121,19 +130,24 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int selectedItem = item.getItemId();
-        URL url;
         switch (selectedItem) {
             case R.id.highest_rated:
-                url = NetworkUtils.buildUrl("top_rated");
-                new FetchMoviesTask().execute(url);
+                mMovieAdapter.setMovieData(null);
+                getDataFromNetwork("top_rated");
                 return true;
             case R.id.most_popular:
-                url = NetworkUtils.buildUrl("popular");
-                new FetchMoviesTask().execute(url);
+                mMovieAdapter.setMovieData(null);
+                getDataFromNetwork("popular");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
 
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 }

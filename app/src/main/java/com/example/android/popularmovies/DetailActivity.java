@@ -2,12 +2,8 @@ package com.example.android.popularmovies;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,8 +11,6 @@ import com.example.android.popularmovies.data.Movie;
 import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity {
-
-    private Movie mMovie;
 
     private ImageView mMoviePosterImageView;
     private TextView mTitleTextView;
@@ -37,9 +31,11 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent incomingIntent = getIntent();
 
-        if (incomingIntent.hasExtra("Clicked movie")) {
-            mMovie = incomingIntent.getParcelableExtra("Clicked movie");
-            populateUI(mMovie);
+        if (incomingIntent != null) {
+            if (incomingIntent.hasExtra("Clicked movie")) {
+                Movie movie = incomingIntent.getParcelableExtra("Clicked movie");
+                populateUI(movie);
+            }
         }
 
     }

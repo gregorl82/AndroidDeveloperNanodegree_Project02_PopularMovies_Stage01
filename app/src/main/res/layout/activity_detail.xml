@@ -2,9 +2,10 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000" >
+    android:background="#000000">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -19,12 +20,12 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="6dp"
             android:layout_marginBottom="12dp"
-            android:contentDescription="Movie poster"
-            android:src="@drawable/poster_adastra"
+            android:contentDescription="@string/movie_poster_description"
             app:layout_constraintBottom_toTopOf="@+id/plot_title"
             app:layout_constraintEnd_toStartOf="@+id/tv_detail_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/poster_adastra" />
 
         <TextView
             android:id="@+id/tv_detail_title"
@@ -36,7 +37,6 @@
             android:ellipsize="end"
             android:lines="3"
             android:maxLines="3"
-            android:text="Ad Astra"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -44,7 +44,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/iv_detail_poster"
-            app:layout_constraintTop_toTopOf="@+id/iv_detail_poster" />
+            app:layout_constraintTop_toTopOf="@+id/iv_detail_poster"
+            tools:text="Ad Astra" />
 
         <TextView
             android:id="@+id/releaseDate_title"
@@ -71,13 +72,13 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
-            android:text="9 December 2019"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/rating_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_detail_poster"
-            app:layout_constraintTop_toBottomOf="@+id/releaseDate_title" />
+            app:layout_constraintTop_toBottomOf="@+id/releaseDate_title"
+            tools:text="9 December 2019" />
 
         <TextView
             android:id="@+id/rating_title"
@@ -104,13 +105,13 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="12dp"
-            android:text="7.2 out of 10"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@+id/plot_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_detail_poster"
-            app:layout_constraintTop_toBottomOf="@+id/rating_title" />
+            app:layout_constraintTop_toBottomOf="@+id/rating_title"
+            tools:text="7.2 out of 10" />
 
         <TextView
             android:id="@+id/plot_title"
@@ -139,13 +140,13 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:lineSpacingExtra="4sp"
-            android:text="The near future, a time when both hope and hardships drive humanity to look to the stars and beyond. While a mysterious phenomenon menaces to destroy life on planet Earth, astronaut Roy McBride undertakes a mission across the immensity of space and its many perils to uncover the truth about a lost expedition that decades before boldly faced emptiness and silence in search of the unknown."
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/plot_title" />
+            app:layout_constraintTop_toBottomOf="@+id/plot_title"
+            tools:text="The near future, a time when both hope and hardships drive humanity to look to the stars and beyond. While a mysterious phenomenon menaces to destroy life on planet Earth, astronaut Roy McBride undertakes a mission across the immensity of space and its many perils to uncover the truth about a lost expedition that decades before boldly faced emptiness and silence in search of the unknown." />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

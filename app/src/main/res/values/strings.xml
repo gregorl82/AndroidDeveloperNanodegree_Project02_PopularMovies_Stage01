@@ -4,4 +4,5 @@
     <string name="highest_rated">Highest rated</string>
     <string name="most_popular">Most popular</string>
     <string name="back">Back to list</string>
+    <string name="movie_poster_description">Movie poster</string>
 </resources>

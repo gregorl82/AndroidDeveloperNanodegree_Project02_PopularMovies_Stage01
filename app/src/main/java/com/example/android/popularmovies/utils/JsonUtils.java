@@ -34,7 +34,7 @@ public class JsonUtils {
                 title = movieObject.getString("original_title");
                 plot = movieObject.getString("overview");
                 rating = movieObject.getDouble("vote_average");
-                releaseDate = movieObject.getString("release_date");
+                releaseDate = MoviedbApiUtils.formatDate(movieObject.getString("release_date"));
                 image = MoviedbApiUtils.formatImage(movieObject.getString("poster_path"));
 
                 Movie movie = new Movie(title, releaseDate, image, plot, rating);

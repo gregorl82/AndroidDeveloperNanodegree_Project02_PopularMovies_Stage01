@@ -22,12 +22,16 @@ public class NetworkUtils {
     final static String PAGE_PARAM = "page";
     final static String PAGE_VALUE = "1";
 
+    final static String REGION_PARAM = "region";
+    final static String REGION_VALUE = "GB";
+
     public static URL buildUrl(String endpoint) {
         Uri builtUri = Uri.parse(API_BASE_URL).buildUpon()
                 .appendPath(endpoint)
                 .appendQueryParameter(API_PARAM, API_KEY)
                 .appendQueryParameter(LANG_PARAM, LANG_VALUE)
                 .appendQueryParameter(PAGE_PARAM,PAGE_VALUE)
+                .appendQueryParameter(REGION_PARAM, REGION_VALUE)
                 .build();
 
         URL url = null;

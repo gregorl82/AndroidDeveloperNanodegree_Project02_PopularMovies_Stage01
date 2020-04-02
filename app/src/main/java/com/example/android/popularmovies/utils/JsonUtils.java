@@ -10,38 +10,43 @@ import java.util.ArrayList;
 
 public class JsonUtils {
 
-    public static ArrayList<Movie> parseJsonResponse(String json) throws JSONException {
+    public static ArrayList<Movie> parseJsonResponse(String json) {
 
         ArrayList<Movie> movies = new ArrayList<>();
 
-        JSONObject fullResponse = new JSONObject(json);
-        JSONArray results = fullResponse.getJSONArray("results");
+        JSONObject fullResponse;
+        try {
+            fullResponse = new JSONObject(json);
 
-        int resultsSize = results.length();
-        for (int i = 0; i < resultsSize; i++) {
+            JSONArray results = fullResponse.getJSONArray("results");
 
-            String title;
-            String releaseDate;
-            String image;
-            String plot;
-            double rating;
+            int resultsSize = results.length();
+            for (int i = 0; i < resultsSize; i++) {
 
-            JSONObject movieObject = results.getJSONObject(i);
+                String title;
+                String releaseDate;
+                String image;
+                String plot;
+                double rating;
 
-            title = movieObject.getString("original_title");
-            plot = movieObject.getString("overview");
-            rating = movieObject.getDouble("vote_average");
-            releaseDate = movieObject.getString("release_date");
-            image = MoviedbApiUtils.formatImage(movieObject.getString("poster_path"));
+                JSONObject movieObject = results.getJSONObject(i);
 
-            Movie movie = new Movie(title, releaseDate, image, plot, rating);
+                title = movieObject.getString("original_title");
+                plot = movieObject.getString("overview");
+                rating = movieObject.getDouble("vote_average");
+                releaseDate = movieObject.getString("release_date");
+                image = MoviedbApiUtils.formatImage(movieObject.getString("poster_path"));
 
-            movies.add(movie);
+                Movie movie = new Movie(title, releaseDate, image, plot, rating);
 
+                movies.add(movie);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
         return movies;
-
     }
 
 }

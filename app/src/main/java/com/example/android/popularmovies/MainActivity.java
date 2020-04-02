@@ -9,6 +9,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -24,9 +27,6 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickHandler {
-
-    // TODO (3) Use AsyncTask to replace dummy data
-    // TODO (5) Implement menu and sort method
 
     private ArrayList<Movie> mMovies = new ArrayList<>();
 
@@ -114,4 +114,29 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mErrorMessageDisplay.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int selectedItem = item.getItemId();
+        URL url;
+        switch (selectedItem) {
+            case R.id.highest_rated:
+                url = NetworkUtils.buildUrl("top_rated");
+                new FetchMoviesTask().execute(url);
+                return true;
+            case R.id.most_popular:
+                url = NetworkUtils.buildUrl("popular");
+                new FetchMoviesTask().execute(url);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
 }

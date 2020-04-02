@@ -55,5 +55,5 @@ public class DetailActivity extends AppCompatActivity {
         mPlotTextView.setText(plot);
     }
 
-    // TODO (7) Implement menu and back method
+    // TODO (4) Implement menu and back method
 }

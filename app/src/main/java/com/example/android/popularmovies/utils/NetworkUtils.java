@@ -14,7 +14,7 @@ public class NetworkUtils {
     final static String API_BASE_URL = "https://api.themoviedb.org/3/movie";
 
     final static String API_PARAM = "api_key";
-    final static String API_KEY = "******";
+    final static String API_KEY = "************************";
 
     final static String LANG_PARAM = "language";
     final static String LANG_VALUE = "en-US";

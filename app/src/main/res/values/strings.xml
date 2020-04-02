@@ -2,4 +2,7 @@
     <string name="app_name">Popular Movies</string>
     
     <string name="error_message">Error getting data</string>
+    <string name="highest_rated">Highest rated</string>
+    <string name="most_popular">Most popular</string>
+    <string name="back">Back</string>
 </resources>
